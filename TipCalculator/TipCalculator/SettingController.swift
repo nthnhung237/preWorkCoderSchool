@@ -77,9 +77,11 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         setSize.autorepeat = true
         setSize.maximumValue = 50
         setSize.value = Double(fontSize)
-        lbSize.text = "\(size)"
+        lbSize.text = "\(setSize.value)"
         //set button cancel && ok
         btnOk.layer.cornerRadius = 7
+        //set color
+        sgColor.selectedSegmentIndex = 1
     }
     
     override func didReceiveMemoryWarning() {
@@ -92,7 +94,6 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
         Tiprate.isUserInteractionEnabled = true
         tiprate = Int(Tiprate.value)
         lbTipRate.text = "\(tiprate)" + "%"
-        
     }
     
     //set Fort

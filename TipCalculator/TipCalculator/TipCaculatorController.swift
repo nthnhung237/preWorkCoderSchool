@@ -16,13 +16,15 @@ var fontSize: CGFloat = 35
 
 var ColorTitle : UIColor!
 
-var BackgroundTitle: UIColor!
+var BackgroundTitle: UIColor = UIColor(red: 200/255, green: 153/255, blue: 100/255, alpha: 0.5)
 
 class TipCaculatorController: UIViewController {
 
     @IBOutlet var lbShow: UILabel!
     
     @IBOutlet var btnDelete: UIButton!
+    
+    @IBOutlet weak var btnClearAll: UIButton!
     
     @IBOutlet var btSetting: UIBarButtonItem!
     
@@ -105,41 +107,42 @@ class TipCaculatorController: UIViewController {
     }
     
     @IBAction func mainButton(_ sender: UIButton) {
-        
-        switch sender.tag {
-        case 1:
-            strNumber += "1"
-            lbShow.text = "$" + strNumber
-        case 2:
-            strNumber += "2"
-            lbShow.text = "$" + strNumber
-        case 3:
-            strNumber += "3"
-            lbShow.text = "$" + strNumber
-        case 4:
-            strNumber += "4"
-            lbShow.text = "$" + strNumber
-        case 5:
-            strNumber += "5"
-            lbShow.text = "$" + strNumber
-        case 6:
-            strNumber += "6"
-            lbShow.text = "$" + strNumber
-        case 7:
-            strNumber += "7"
-            lbShow.text = "$" + strNumber
-        case 8:
-            strNumber += "8"
-            lbShow.text = "$" + strNumber
-        case 9:
-            strNumber += "9"
-            lbShow.text = "$" + strNumber
-        case 11:
-            strNumber += "0"
-            lbShow.text = "$" + strNumber
-        default:
-            strNumber += "."
-            lbShow.text = "$" + strNumber
+        if (strNumber.characters.count < 8) {
+            switch sender.tag {
+            case 1:
+                strNumber += "1"
+                lbShow.text = "$" + strNumber
+            case 2:
+                strNumber += "2"
+                lbShow.text = "$" + strNumber
+            case 3:
+                strNumber += "3"
+                lbShow.text = "$" + strNumber
+            case 4:
+                strNumber += "4"
+                lbShow.text = "$" + strNumber
+            case 5:
+                strNumber += "5"
+                lbShow.text = "$" + strNumber
+            case 6:
+                strNumber += "6"
+                lbShow.text = "$" + strNumber
+            case 7:
+                strNumber += "7"
+                lbShow.text = "$" + strNumber
+            case 8:
+                strNumber += "8"
+                lbShow.text = "$" + strNumber
+            case 9:
+                strNumber += "9"
+                lbShow.text = "$" + strNumber
+            case 11:
+                strNumber += "0"
+                lbShow.text = "$" + strNumber
+            default:
+                strNumber += "."
+                lbShow.text = "$" + strNumber
+        }
         }
         
     }
@@ -147,7 +150,7 @@ class TipCaculatorController: UIViewController {
     @IBAction func nextButton(_ sender: UIButton) {
 
         if strNumber.isEmpty == true {
-            var createAccountErrorAlert: UIAlertView = UIAlertView()
+            let createAccountErrorAlert: UIAlertView = UIAlertView()
             createAccountErrorAlert.delegate = self
             createAccountErrorAlert.title = ""
             createAccountErrorAlert.message = "Could not number!"
@@ -172,6 +175,10 @@ class TipCaculatorController: UIViewController {
         }
     }
     
+    @IBAction func clearButton(_ sender: Any) {
+        strNumber = ""
+        lbShow.text = "$"
+    }
     
     @IBAction func settingButton(_ sender: AnyObject) {
         
