@@ -8,10 +8,7 @@
 
 import UIKit
 
-var tiprate : Int = 50
-
 class BillAmountController: UIViewController {
-    
     
     @IBOutlet var lbBill: UILabel!
     
@@ -23,10 +20,12 @@ class BillAmountController: UIViewController {
     
     @IBOutlet var lbTotal: UILabel!
     
+    var tiprate : Int = 50
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        tiprate = datadefault.object(forKey: "tip") as! Int
         sldTiprate.minimumValue = 0
         sldTiprate.maximumValue = 100
         sldTiprate.isContinuous = true
@@ -42,6 +41,10 @@ class BillAmountController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        datadefault.set(tiprate, forKey: "tip")
     }
     
     @IBAction func sliderValueChanged(_ sender: UISlider){

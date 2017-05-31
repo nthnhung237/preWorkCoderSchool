@@ -10,13 +10,11 @@ import UIKit
 
 var bill: Double = 0
 
-var strNameFont : String = "AppleSDGothicNeo-Bold"
-
-var fontSize: CGFloat = 35
-
-var ColorTitle : UIColor!
+var ColorTitle : UIColor = UIColor(red: 0/255, green: 0/255, blue: 100/255, alpha: 0.5)
 
 var BackgroundTitle: UIColor = UIColor(red: 200/255, green: 153/255, blue: 100/255, alpha: 0.5)
+
+var datadefault = UserDefaults.standard
 
 class TipCaculatorController: UIViewController {
 
@@ -54,12 +52,20 @@ class TipCaculatorController: UIViewController {
     
     var strNumber : String = ""
     
+    var sizenumber : CGFloat!
+    
+    var strFontNumber : String!
+    
+    //var ColorTitleNumber : UIColor!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.title = "TIP CALCULATOR";
         self.navigationItem.hidesBackButton = true;
+        self.read()
         self.setup()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -67,19 +73,23 @@ class TipCaculatorController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func read() {
+        sizenumber = datadefault.object(forKey: "size") as! CGFloat
+        strFontNumber = datadefault.object(forKey: "font") as! String
+    }
+    
     func setup(){
-        
-        btn.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn0.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn1.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn2.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn3.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn4.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn5.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn6.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn7.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn8.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
-        btn9.titleLabel!.font = UIFont(name: strNameFont , size: fontSize)
+        btn.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn0.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn1.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn2.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn3.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn4.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn5.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn6.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn7.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn8.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
+        btn9.titleLabel!.font = UIFont(name: strFontNumber , size: sizenumber)
         btn.setTitleColor(ColorTitle, for: UIControlState())
         btn0.setTitleColor(ColorTitle, for: UIControlState())
         btn1.setTitleColor(ColorTitle, for: UIControlState())

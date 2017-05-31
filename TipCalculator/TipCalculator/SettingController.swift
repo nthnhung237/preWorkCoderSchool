@@ -59,13 +59,20 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     @IBOutlet var btsky: UIButton!
     
+    var fontSize: CGFloat = 35
+    
+    var strNameFont : String = "AppleSDGothicNeo-Bold"
+    
+    var tipratesetting : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // tip rate
+        tipratesetting = datadefault.object(forKey: "tip") as! Int
         Tiprate.minimumValue = 0
         Tiprate.maximumValue = 100
-        Tiprate.value = Float (tiprate)
-        lbTipRate.text = "\(tiprate)" + "%"
+        Tiprate.value = Float (tipratesetting)
+        lbTipRate.text = "\(tipratesetting)" + "%"
         // set font
         self.setFont.dataSource = self
         self.setFont.delegate = self
@@ -73,6 +80,7 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
             arrNameFont.add(str)
         }
         //set size
+        fontSize = datadefault.object(forKey: "size") as! CGFloat
         setSize.wraps = true
         setSize.autorepeat = true
         setSize.maximumValue = 50
@@ -92,8 +100,8 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBAction func sldTipRate(_ sender: AnyObject) {
         Tiprate.isContinuous = true
         Tiprate.isUserInteractionEnabled = true
-        tiprate = Int(Tiprate.value)
-        lbTipRate.text = "\(tiprate)" + "%"
+        tipratesetting = Int(Tiprate.value)
+        lbTipRate.text = "\(tipratesetting)" + "%"
     }
     
     //set Fort
@@ -107,12 +115,11 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrNameFont[row] as! String
+        return arrNameFont[row] as? String
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        arrNameFont[row] = strNameFont
         strNameFont = arrNameFont[row] as! String
 
     }
@@ -120,6 +127,7 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
         lbSize.text = Int(sender.value).description
         fontSize = CGFloat(sender.value)
+       
     }
     
     
@@ -212,8 +220,12 @@ class SettingController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     
     @IBAction func btnOk(_ sender: AnyObject) {
-
+        
+        datadefault.set(fontSize, forKey: "size")
+        datadefault.set(strNameFont, forKey: "font")
+        datadefault.set(tipratesetting, forKey: "tip")
         let TipViewControllerObj = self.storyboard?.instantiateViewController(withIdentifier: "TipCaculator") as? TipCaculatorController
+        //TipViewControllerObj?.initdefault()
         self.navigationController?.pushViewController(TipViewControllerObj!, animated: true)
         
     }
